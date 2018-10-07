@@ -8,7 +8,6 @@
 #include <chrono>
 #include <map>
 #include <algorithm>
-
 static const char alpha[] =
 	        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	        "abcdefghijklmnopqrstuvwxyz";

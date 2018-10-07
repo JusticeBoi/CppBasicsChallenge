@@ -84,17 +84,16 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 			entry_int[i] = num[dist(rng) % (sizeof(num) - 1)];
 			//			entry_int.append(1,num[dist(rng) % (sizeof(num) - 1)]);
 		}
-		outf.write(entry_int.c_str(),sizeof(char)*size);
-		outf<<"\t";
+		outf.write(entry_int.c_str(),sizeof(char) * size);
+		outf<<'\t';
 
 		for (int i = 0; i < size; ++i) {
 			entry_str[i] = alpha[dist(rng) % (sizeof(alpha) - 1)];
 			//			entry_str.append(1,alpha[dist(rng) % (sizeof(alpha) - 1)]);
 		}
-		outf.write(entry_str.c_str(),sizeof(char)*size);
+		outf.write(entry_str.c_str(),sizeof(char) * size);
 
-		outf<<std::endl;
-
+		outf<<'\n';
 	}
 
 
@@ -151,12 +150,12 @@ void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  ve
 
 	for(const auto& int_string_pair : vec_to_be_written)
 	{
-		outf << int_string_pair.first<<"\t";
+		outf << int_string_pair.first<<'\t';
 		for(const auto& a_char : int_string_pair.second)
 		{
 			outf<<(int)a_char;
 		}
-		outf<<std::endl;
+		outf<<'\n';
 	}
 	outf.close();
 }

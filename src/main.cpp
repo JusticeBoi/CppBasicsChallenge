@@ -5,7 +5,7 @@
 int main()
 {
 
-	size_t number_of_entries = 5e2;
+	size_t number_of_entries = 5e6;
 	auto start_read = std::chrono::steady_clock::now();
 //	writeEntries_1(number_of_entries,6);
 	produceAndWriteEntriesInBinaryWithSize(7,number_of_entries);
@@ -21,10 +21,10 @@ int main()
 //			{
 //				return _pair1.first < _pair2.first;
 //			});
-	for(const auto& pair : vec_of_pairs  )
-	{
-		std::cout <<pair.first<<"\t"<< pair.second <<std::endl;
-	}
+//	for(const auto& pair : vec_of_pairs  )
+//	{
+//		std::cout <<pair.first<<"\t"<< pair.second <<std::endl;
+//	}
 	end_read = std::chrono::steady_clock::now();
 	 diff_read = end_read - start_read;
 
