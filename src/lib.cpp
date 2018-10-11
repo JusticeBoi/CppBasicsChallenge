@@ -77,23 +77,28 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1,std::numeric_limits<int>::max());
 
 	std::ofstream outf("outfile_final.bin",std::ios::binary);
+	char tab = '\t';
+	char endl = '\n';
 
+	size_t size_str = sizeof(char) * size;
+	size_t size_numbers_str = sizeof(num) - 1 ;
+	size_t size_alpha_str = sizeof(alpha) - 1 ;
 	for(int ent = 0 ; ent < number_of_entries ; ++ent)
 	{
 		for (int i = 0; i < size; ++i) {
-			entry_int[i] = num[dist(rng) % (sizeof(num) - 1)];
+			entry_int[i] = num[dist(rng) % (size_numbers_str)];
 			//			entry_int.append(1,num[dist(rng) % (sizeof(num) - 1)]);
 		}
-		outf.write(entry_int.c_str(),sizeof(char) * size);
-		outf<<'\t';
+		outf.write(entry_int.c_str(),size_str);
+		outf.write(&tab,sizeof(char));
 
 		for (int i = 0; i < size; ++i) {
-			entry_str[i] = alpha[dist(rng) % (sizeof(alpha) - 1)];
+			entry_str[i] = alpha[dist(rng) % (size_alpha_str)];
 			//			entry_str.append(1,alpha[dist(rng) % (sizeof(alpha) - 1)]);
 		}
-		outf.write(entry_str.c_str(),sizeof(char) * size);
+		outf.write(entry_str.c_str(),size_str);
+		outf.write(&endl,sizeof(char));
 
-		outf<<'\n';
 	}
 
 
@@ -101,23 +106,7 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 }
 
 
-std::map<int,std::string> readBinFile_map(int number_of_entries)
-		{
-			std::ifstream inf("outfile_final.bin",std::ios::binary);
-			std::string string_part = std::string();
-			std::string int_part = std::string();
-			std::map<int,std::string> readFile;
 
-			for (int i = 0 ; i < number_of_entries ;++i)
-			{
-			inf >> int_part;
-			inf >> string_part;
-			readFile.insert(std::make_pair(std::stoi(int_part),string_part));
-			}
-			inf.close();
-			return readFile;
-
-		}
 
 
 void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
@@ -127,12 +116,14 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
 		return _pair1.first < _pair2.first;
 			});
 }
+
 std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries)
 		{
 	std::ifstream inf("outfile_final.bin",std::ios::binary);
 	std::string string_part = std::string();
 	std::string int_part = std::string();
 	std::vector<std::pair<int,std::string>> vec_of_pairs;
+	vec_of_pairs.reserve(number_of_entries);
 	for (int i = 0 ; i < number_of_entries ;++i)
 	{
 		inf >> int_part;
@@ -144,23 +135,50 @@ std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries
 
 		}
 
+
 void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  vec_to_be_written)
 {
 	std::ofstream outf("final_result_ascii.txt");
 
-	for(const auto& int_string_pair : vec_to_be_written)
+
+	char tab = '\t';
+	char space = ' ';
+	char endl ='\n';
+	for(auto& int_string_pair : vec_to_be_written)
 	{
-		outf << int_string_pair.first<<'\t';
-		for(const auto& a_char : int_string_pair.second)
+		outf << int_string_pair.first;
+		outf.write(&tab,sizeof(char));
+
+		for( auto& a_char : int_string_pair.second)
 		{
 			outf<<(int)a_char;
+			outf.write(&space,sizeof(char));
 		}
-		outf<<'\n';
+//		outf<<end_line;
+		outf.write(&endl,sizeof(char));
 	}
 	outf.close();
 }
 
 
-
-
+// previous trials with maps
+//std::map<int,std::string> readBinFile_map(int number_of_entries)
+//		{
+//			std::ifstream inf("outfile_final.bin",std::ios::binary);
+//			std::string string_part = std::string();
+//			std::string int_part = std::string();
+//			std::map<int,std::string> readFile;
+//
+//			for (int i = 0 ; i < number_of_entries ;++i)
+//			{
+//			inf >> int_part;
+//			inf >> string_part;
+//			readFile.insert(std::make_pair(std::stoi(int_part),string_part));
+//			}
+//			inf.close();
+//			return readFile;
+//
+//		}
+//
+//
 

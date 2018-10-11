@@ -7,7 +7,8 @@
 #include <fstream>
 #include <chrono>
 #include <map>
-#include <algorithm>
+#include <parallel/algorithm>
+#include <array>
 static const char alpha[] =
 	        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	        "abcdefghijklmnopqrstuvwxyz";
@@ -23,6 +24,8 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries);
 
 std::map<int,std::string> readBinFile_map(int number_of_entries);
 std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries);
+
+
 
 void sortVecOfPair(std::vector<std::pair<int,std::string>>&);
 
