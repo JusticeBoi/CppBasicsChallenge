@@ -31,3 +31,6 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>&);
 
 void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  to_be_written);
 
+int fast_char_to_int(const char *p); 
+std::multimap<int,std::string> readBinFile_multi_map(int number_of_entries);
+void writeSortedEntriesASCII_mmap(const std::multimap<int,std::string>&  mmap);
