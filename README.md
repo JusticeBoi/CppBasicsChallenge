@@ -1,7 +1,7 @@
 # C++ Basics Challenge
 
 ## Rules
-1) Generate a file containing 2x10^6 random entries. The file should have the following format <int> <string>
+1) Generate a file containing 2x10^6 random entries. The file should have the following format int, string
 2) Write out that file in binary format.
 3) Read it back in.
 4) Sort it in decreasing order.
