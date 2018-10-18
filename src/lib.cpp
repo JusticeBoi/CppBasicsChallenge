@@ -71,15 +71,16 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 	for(int ent = 0 ; ent < number_of_entries ; ++ent)
 	{
         entry_int = dist(rng);
-        std::cout << entry_int << std::endl;
+        //std::cout << entry_int << std::endl;
         outf.write(reinterpret_cast<const char*>(&entry_int),sizeof(entry_int));
 		//outf.write(&tab,sizeof(char));
 
 		for (int i = 0; i < size; ++i) {
 			entry_str += alpha[dist(rng) % (size_alpha_str)];
 		}
-        std::cout << entry_str << std::endl;
-	    outf << entry_str;
+        //std::cout << entry_str << std::endl;
+        //std::cout <<sizeof(entry_str.c_str())<<std::endl;
+	   outf.write(entry_str.c_str(),entry_str.size()); 
         entry_str.clear();
         //outf.write((char *)&entry_str,sizeof(entry_str));
 		//outf.write(&endl,sizeof(char));
@@ -102,10 +103,10 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
 			});
 }
 
-std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries)
+std::vector<std::pair<int,std::string>> readBinFile_vector(int size, int number_of_entries)
 		{
 	std::ifstream inf("outfile_final.bin",std::ios::binary | std::ios::in);
-	std::string string_part; 
+	std::string string_part(size,'\0');
     int int_part ;	
     //std::string int_part = std::string();
 	std::vector<std::pair<int,std::string>> vec_of_pairs;
@@ -114,11 +115,11 @@ std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries
 	    for (int i = 0 ; i < number_of_entries ;++i)
 	    {
 	    inf.read(reinterpret_cast<char * >(&int_part),sizeof(int)); 
-        std::cout << "int part : "<< int_part << std::endl;
+        //std::cout << "int part : "<< int_part << std::endl;
             //inf >> int_part;
-	   inf >> string_part; 
+	   inf.read(&string_part[0],size); 
         ////inf.read(reinterpret_cast<char * >(&string_part),sizeof(string_part)); 
-        std::cout <<"int part "<< int_part << " str part : "<< string_part << std::endl;
+        //std::cout <<"int part "<< int_part << " str part : "<< string_part << std::endl;
             vec_of_pairs.emplace_back(int_part,string_part);
             //vec_of_pairs[i] = {fast_char_to_int(int_part.c_str()),string_part};
 	    }

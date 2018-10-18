@@ -23,7 +23,7 @@ void writeEntries_2(const std::vector<std::string>& vec_strings);
 void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries);
 
 std::map<int,std::string> readBinFile_map(int number_of_entries);
-std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries);
+std::vector<std::pair<int,std::string>> readBinFile_vector(int size, int number_of_entries);
 
 
 
