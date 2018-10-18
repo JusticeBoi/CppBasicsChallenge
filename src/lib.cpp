@@ -51,8 +51,6 @@ int fast_char_to_int(const char *p) {
 //
 void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 {
-
-
 	std::string entry_str = std::string();
 	entry_str.reserve(size);
 
@@ -74,13 +72,13 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 	for(int ent = 0 ; ent < number_of_entries ; ++ent)
 	{
 		for (int i = 0; i < size; ++i) {
-			entry_int[i] = num[dist(rng) % (size_numbers_str)];
+			entry_int += num[dist(rng) % (size_numbers_str)];
 		}
 		outf.write(entry_int.c_str(),size_str);
 		outf.write(&tab,sizeof(char));
 
 		for (int i = 0; i < size; ++i) {
-			entry_str[i] = alpha[dist(rng) % (size_alpha_str)];
+			entry_str += alpha[dist(rng) % (size_alpha_str)];
 		}
 		outf.write(entry_str.c_str(),size_str);
 		outf.write(&endl,sizeof(char));
@@ -118,6 +116,7 @@ std::vector<std::pair<int,std::string>> readBinFile_vector(int number_of_entries
             //vec_of_pairs.emplace_back(std::stoi(int_part),string_part);
             //-----BELOW IS POSSIBLY FASTER BUT LESS SAFE VERSION OF stoi, C.style.
             vec_of_pairs.emplace_back(fast_char_to_int(int_part.c_str()),string_part);
+            //vec_of_pairs[i] = {fast_char_to_int(int_part.c_str()),string_part};
 	    }
         }
 	inf.close();
