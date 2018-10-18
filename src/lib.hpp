@@ -9,6 +9,8 @@
 #include <map>
 #include <parallel/algorithm>
 #include <array>
+#include <cstdio>
+
 static const char alpha[] =
 	        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	        "abcdefghijklmnopqrstuvwxyz";
