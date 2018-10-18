@@ -129,27 +129,27 @@ std::vector<std::pair<int,std::string>> readBinFile_vector(int size, int number_
 		}
 
 
-std::multimap<int,std::string> readBinFile_multi_map(int number_of_entries){
-	
-    std::ifstream inf("outfile_final.bin",std::ios::binary);
-	std::string string_part = std::string();
-	std::string int_part = std::string();
-    std::multimap<int,std::string> mmap;
-
-    if (inf.is_open()){
-	    for (int i = 0 ; i < number_of_entries ;++i)
-	    {
-	    	inf >> int_part;
-	    	inf >> string_part;
-            //vec_of_pairs.emplace_back(std::stoi(int_part),string_part);
-            //-----BELOW IS POSSIBLY FASTER BUT LESS SAFE VERSION OF stoi, C.style.
-            mmap.emplace(fast_char_to_int(int_part.c_str()),string_part);
-	    }
-        }
-	inf.close();
-	return mmap;
-
-}
+//std::multimap<int,std::string> readBinFile_multi_map(int number_of_entries){
+//	
+//    std::ifstream inf("outfile_final.bin",std::ios::binary);
+//	std::string string_part = std::string();
+//	std::string int_part = std::string();
+//    std::multimap<int,std::string> mmap;
+//
+//    if (inf.is_open()){
+//	    for (int i = 0 ; i < number_of_entries ;++i)
+//	    {
+//	    	inf >> int_part;
+//	    	inf >> string_part;
+//            //vec_of_pairs.emplace_back(std::stoi(int_part),string_part);
+//            //-----BELOW IS POSSIBLY FASTER BUT LESS SAFE VERSION OF stoi, C.style.
+//            mmap.emplace(fast_char_to_int(int_part.c_str()),string_part);
+//	    }
+//        }
+//	inf.close();
+//	return mmap;
+//
+//}
 void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  vec_to_be_written)
 {
 	//std::ofstream outf("final_result_ascii.txt",std::ios::out);
@@ -169,29 +169,29 @@ void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  ve
         });
     std::fclose(fp);
 }
-void writeSortedEntriesASCII_mmap(const std::multimap<int,std::string>&  mmap)
-{
-	std::ofstream outf("final_result_ascii.txt");
-
-
-	char tab = '\t';
-	char space = ' ';
-	char endl ='\n';
-	for(auto& int_string_pair : mmap)
-	{
-		outf << int_string_pair.first;
-		outf.write(&tab,sizeof(char));
-
-		for( auto& a_char : int_string_pair.second)
-		{
-			outf<<(int)a_char;
-			outf.write(&space,sizeof(char));
-		}
-//		outf<<end_line;
-		outf.write(&endl,sizeof(char));
-	}
-	outf.close();
-}
+//void writeSortedEntriesASCII_mmap(const std::multimap<int,std::string>&  mmap)
+//{
+//	std::ofstream outf("final_result_ascii.txt");
+//
+//
+//	char tab = '\t';
+//	char space = ' ';
+//	char endl ='\n';
+//	for(auto& int_string_pair : mmap)
+//	{
+//		outf << int_string_pair.first;
+//		outf.write(&tab,sizeof(char));
+//
+//		for( auto& a_char : int_string_pair.second)
+//		{
+//			outf<<(int)a_char;
+//			outf.write(&space,sizeof(char));
+//		}
+////		outf<<end_line;
+//		outf.write(&endl,sizeof(char));
+//	}
+//	outf.close();
+//}
 
 
 // previous trials with maps
