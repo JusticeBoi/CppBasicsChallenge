@@ -5,7 +5,7 @@
 int main()
 {
 
-	size_t number_of_entries = 5e7;
+	size_t number_of_entries = 5e1;
 
     
     auto start_read = std::chrono::steady_clock::now();
