@@ -13,4 +13,5 @@ install_manifest.txt
 *.txt
 *bin
 *.json
-
+*tags
+ugurcan*
