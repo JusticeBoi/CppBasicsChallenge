@@ -2,10 +2,11 @@
 
 
 
-int main()
+int main(int argc, char** argv)
 {
-
-	size_t number_of_entries = 5e7;
+   if ( argc != 2) std::cerr << "number of arguments must be one, the number of entries " <<'\n';
+	size_t number_of_entries = std::stoi(std::string(argv[1]));
+	//size_t number_of_entries =5e7;
 
     
     auto start_read = std::chrono::steady_clock::now();
