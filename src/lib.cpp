@@ -62,11 +62,13 @@ void produceAndWriteEntriesInBinaryWithSize(int size,int number_of_entries)
 
 void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
 {
-    std::cout <<"Sorting ... \n"; 
-	std::sort(to_be_sorted.begin(),to_be_sorted.end(),[](std::pair<int,std::string>& _pair1,std::pair<int,std::string>& _pair2)
-			{
-		return _pair1.first < _pair2.first;
-			});
+        #ifdef par_exe 
+        std::cout <<"Parallel Sorting ... \n"; 
+	        __gnu_parallel::sort(to_be_sorted.begin(),to_be_sorted.end());
+        #else
+        std::cout <<"Seriel Sorting ... \n"; 
+             std::sort(to_be_sorted.begin(),to_be_sorted.end());
+        #endif
 }
 
 std::vector<std::pair<int,std::string>> readBinFile_vector(int size, int number_of_entries)

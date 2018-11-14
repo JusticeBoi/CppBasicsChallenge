@@ -7,11 +7,17 @@
 #include <fstream>
 #include <chrono>
 #include <map>
-#include <parallel/algorithm>
 #include <array>
 #include <cstdio>
 #include "omp.h"
-
+#if __cplusplus >= 201500
+    #pragma message "parallel sorting active , need -fopenmp flag" 
+    #include <parallel/algorithm>
+    #define par_exe
+#else
+    #pragma message "for parallel sorting, need -std=c++17 and -fopenmp flag" 
+    #include <algorithm>
+#endif
 static const char alpha[] =
 	        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	        "abcdefghijklmnopqrstuvwxyz'/?.!%$&;<>=:";
