@@ -9,10 +9,12 @@
 #include <map>
 #include <array>
 #include <cstdio>
+#include <iterator>
 #include "omp.h"
 #if defined(_MSC_VER) && __cplusplus >= 201500
     #pragma message "parallel sorting active , need -fopenmp flag" 
     #include <execution>
+    #include <algorithm>
     #define par_exe_msvc
 #elif defined(__GNUG__) && __cplusplus >= 201500
     #pragma message "parallel sorting active , need -fopenmp flag" 
@@ -39,4 +41,3 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>&);
 
 void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  to_be_written);
 
-int fast_char_to_int(const char *p); 

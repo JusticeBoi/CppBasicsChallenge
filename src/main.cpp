@@ -9,6 +9,7 @@ int main(int argc, char** argv)
 	//size_t number_of_entries =5e7;
 
     
+    std::cout <<"number of threads :" << omp_get_max_threads() << std::endl;
     auto start_read = std::chrono::steady_clock::now();
 	produceAndWriteEntriesInBinaryWithSize(7,number_of_entries);
     auto end_read = std::chrono::steady_clock::now();

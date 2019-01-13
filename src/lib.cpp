@@ -43,7 +43,7 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
         std::sort(std::execution::par_unseq,to_be_sorted.begin(), to_be_sorted.end()); 
 
         #else
-        std::cout <<"Seriel Sorting ... \n"; 
+        std::cout <<"Serial Sorting ... \n"; 
         std::sort(to_be_sorted.begin(), to_be_sorted.end());
         #endif
     }
@@ -51,13 +51,16 @@ void sortVecOfPair(std::vector<std::pair<int,std::string>>& to_be_sorted)
 std::vector<std::pair<int,std::string>> readBinFile_vector(int size, int number_of_entries)
 	{
 	    std::ifstream inf("outfile_final.bin", std::ios::binary | std::ios::in);
+
 	    std::string string_part(size, '\0');
         int int_part ;	
+
 	    std::vector<std::pair<int,std::string>> vec_of_pairs;
 
 	    vec_of_pairs.reserve(number_of_entries);
 
         std::cout << "Reading the binary file into a vector of pairs ... \n";
+
         if (inf.is_open())
             {
 	        for (int i = 0 ; i < number_of_entries ;++i)
@@ -81,17 +84,14 @@ void writeSortedEntriesASCII(const std::vector<std::pair<int,std::string>> &  ve
 {
     std::FILE * fp = fopen("final_result_ascii.txt","w");
 
-    double b = 0.1;
     std::cout <<"Writing sorted entries into final_result_ascii.txt file ...\n";
-    
-    std::for_each(vec_to_be_written.begin(), vec_to_be_written.end(), [&b,&fp](const std::pair<int,std::string>& pair)
+    for(const std::pair<int,std::string>& pair : vec_to_be_written)
     {
         fprintf(fp, "%7d\t%s\n", pair.first, pair.second.c_str());
-        if(pair.first > static_cast<int>(std::numeric_limits<int>::max() * b))
-            {
-                std::cout <<b * 100 <<"% completed.\n";
-                b+=0.1;
-            }
-    });
+    }
+    //std::for_each(vec_to_be_written.begin(), vec_to_be_written.end(), [&b,&fp,&max](const std::pair<int,std::string>& pair)
+    //{
+    //    fprintf(fp, "%7d\t%s\n", pair.first, pair.second.c_str());
+    //});
     std::fclose(fp);
 }
